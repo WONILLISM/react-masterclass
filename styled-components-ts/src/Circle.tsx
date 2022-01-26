@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 interface ContainerProps {
@@ -5,7 +6,6 @@ interface ContainerProps {
   borderColor: string;
 }
 
-// Container가 받는 props를 Typescript에게 설명
 const Container = styled.div<ContainerProps>`
   width: 200px;
   height: 200px;
@@ -14,13 +14,13 @@ const Container = styled.div<ContainerProps>`
   border: 1px solid ${(props) => props.borderColor};
 `;
 
-// Typescript에게 object의 형태를 설명
 interface CircleProps {
   bgColor: string;
   borderColor?: string;
 }
 
 const Circle = ({ bgColor, borderColor }: CircleProps) => {
+  const [value, setValue] = useState(0);
   return <Container bgColor={bgColor} borderColor={borderColor ?? bgColor} />;
 };
 
