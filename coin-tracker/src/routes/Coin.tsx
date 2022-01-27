@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { Outlet, useLocation, useParams } from "react-router-dom";
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useMatch,
+  useParams,
+} from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -15,14 +21,14 @@ const Header = styled.div`
   align-items: center;
 `;
 
-const Title = styled.h1`
-  font-size: 48px;
-  color: ${(props) => props.theme.accentColor};
-`;
-
 const Loader = styled.div`
   text-align: center;
   display: block;
+`;
+
+const Title = styled.h1`
+  font-size: 48px;
+  color: ${(props) => props.theme.accentColor};
 `;
 
 const Overview = styled.div`
@@ -32,6 +38,7 @@ const Overview = styled.div`
   padding: 10px 20px;
   border-radius: 10px;
 `;
+
 const OverviewItem = styled.div`
   display: flex;
   flex-direction: column;
@@ -44,8 +51,31 @@ const OverviewItem = styled.div`
     margin-bottom: 5px;
   }
 `;
+
 const Description = styled.p`
   margin: 20px 0px;
+`;
+
+const Tabs = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 25px 0px;
+  gap: 10px;
+`;
+
+const Tab = styled.span<{ isActive: boolean }>`
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 400;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 7px 0px;
+  border-radius: 10px;
+  color: ${(props) =>
+    props.isActive ? props.theme.accentColor : props.theme.textColor};
+  a {
+    display: block;
+  }
 `;
 
 interface RouteState {
@@ -116,6 +146,8 @@ const Coin = () => {
   const { state } = useLocation() as RouteState;
   const [info, setInfo] = useState<IInfoData>();
   const [priceInfo, setPriceInfo] = useState<IPriceData>();
+  const priceMatch = useMatch("/:coinId/price");
+  const chartMatch = useMatch("/:coinId/chart");
 
   useEffect(() => {
     (async () => {
@@ -169,15 +201,17 @@ const Coin = () => {
               <span>{priceInfo?.max_supply}</span>
             </OverviewItem>
           </Overview>
+
+          <Tabs>
+            <Tab isActive={chartMatch !== null}>
+              <Link to="chart">Chart</Link>
+            </Tab>
+            <Tab isActive={priceMatch !== null}>
+              <Link to="price">Price</Link>
+            </Tab>
+          </Tabs>
+
           <Outlet />
-          {/* <Switch>
-            <Route path={`/${coinId}/price`}>
-              <Price />
-            </Route>
-            <Route path={`/${coinId}/chart`}>
-              <Chart />
-            </Route>
-          </Switch> */}
         </>
       )}
     </Container>
