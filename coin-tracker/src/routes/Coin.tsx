@@ -149,10 +149,10 @@ const Coin = () => {
   const chartMatch = useMatch("/:coinId/chart");
   const { isLoading: infoLoading, data: infoData } = useQuery<IInfoData>(
     ["info", coinId],
-    () => fetchCoinInfo(coinId!),
-    {
-      refetchInterval: 5000, // 5초마다 refetch
-    }
+    () => fetchCoinInfo(coinId!)
+    // {
+    //   refetchInterval: 5000, // 5초마다 refetch
+    // }
   );
   const { isLoading: tickersLoading, data: tickersData } = useQuery<IPriceData>(
     ["tickers", coinId],
