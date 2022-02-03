@@ -19,14 +19,18 @@ interface IHistorical {
   market_cap: number;
 }
 
-const Chart = () => {
+interface IChartProps {
+  isDark: boolean;
+}
+
+const Chart = ({ isDark }: IChartProps) => {
   const { coinId } = useOutletContext<ChartProps>();
   const { isLoading, data } = useQuery<IHistorical[]>(["ohlcv", coinId], () =>
     fetchCoinHistory(coinId)
   );
   const options: ApexOptions = {
     theme: {
-      mode: "dark",
+      mode: isDark ? "dark" : "light",
     },
     chart: {
       height: 300,
