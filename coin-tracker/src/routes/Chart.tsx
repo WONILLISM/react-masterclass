@@ -50,8 +50,20 @@ const Chart = () => {
       labels: {
         show: false,
       },
+      type: "datetime",
+      categories: data?.map((price) => price.time_close),
       axisTicks: { show: false },
       axisBorder: { show: false },
+    },
+    fill: {
+      type: "gradient",
+      gradient: { gradientToColors: ["#0be881"], stops: [0, 100] },
+    },
+    colors: ["#0fbcf9"],
+    tooltip: {
+      y: {
+        formatter: (value) => `$ ${value.toFixed(2)}`,
+      },
     },
   };
 
