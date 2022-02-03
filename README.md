@@ -17,6 +17,11 @@
      - `yarn add -D @types/react-router-dom` or `yarn i --save-D @types/react-router-dom`
 6. react query
    - `yarn add react-query` or `npm i react-query`
+7. apexcharts
+   - `yart add apexcharts react-apexcharts` or `npm i apexcharts react-apexcharts`
+8. react helmet
+   - `yarn add react-helmet` or `npm i react-helmet`
+   - `yarn add -D @types/react-helmet` or `npm i --save-D @types/react-helmet`
 
 ## contents
 
