@@ -142,11 +142,9 @@ interface IPriceData {
   };
 }
 
-interface ICoinProps {
-  isDark: boolean;
-}
+interface ICoinProps {}
 
-const Coin = ({ isDark }: ICoinProps) => {
+const Coin = ({}: ICoinProps) => {
   const { coinId } = useParams();
   const { state } = useLocation() as RouteState;
   const priceMatch = useMatch("/:coinId/price");

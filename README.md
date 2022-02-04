@@ -22,6 +22,8 @@
 8. react helmet
    - `yarn add react-helmet` or `npm i react-helmet`
    - `yarn add -D @types/react-helmet` or `npm i --save-D @types/react-helmet`
+9. recoil
+   - `yarn add recoil` or `npm i recoil`
 
 ## contents
 
