@@ -24,6 +24,8 @@
    - `yarn add -D @types/react-helmet` or `npm i --save-D @types/react-helmet`
 9. recoil
    - `yarn add recoil` or `npm i recoil`
+10. react hook form
+    - `yarn add react-hook-form` or `npm i react-hook-form`
 
 ## contents
 
