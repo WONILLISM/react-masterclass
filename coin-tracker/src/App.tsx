@@ -71,7 +71,7 @@ a {
 `;
 
 function App() {
-  const isDark = useRecoilValue(isDarkAtom);
+  const isDark = useRecoilValue(isDarkAtom); // atom의 변화를 감지하는 hook
   return (
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
