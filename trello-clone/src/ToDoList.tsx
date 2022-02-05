@@ -30,6 +30,7 @@ interface IForm {
   lastName: string;
   password1: string;
   password: string;
+  extraError?: string;
 }
 
 const ToDoList = () => {
@@ -37,12 +38,23 @@ const ToDoList = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<IForm>({
     defaultValues: {
+      // 초기 설정 값을 정할 수 있다.
       email: "a",
     },
   });
-  const onValid = (data: any) => {};
+  const onValid = (data: IForm) => {
+    if (data.password !== data.password1) {
+      setError(
+        "password1",
+        { message: "비밀번호가 일치하지 않습니다." },
+        { shouldFocus: true }
+      );
+    }
+    // setError("extraError", { message: "서버와의 연결이 끊겼습니다." });
+  };
 
   return (
     <div>
@@ -64,7 +76,15 @@ const ToDoList = () => {
         {/* <span>{errors.email.type === "require" ? "이메일이 필요합니다."}</span> */}
         <span>{errors?.email?.message}</span>
         <input
-          {...register("firstName", { required: "필수값 입니다." })}
+          {...register("firstName", {
+            required: "필수값 입니다.",
+            validate: {
+              noNico: (value) =>
+                value.includes("nico") ? "no nico allowd" : true,
+              noWopark: (value) =>
+                value.includes("wopark") ? "no wopark allowd" : true,
+            },
+          })}
           placeholder="First Name"
         />
         <span>{errors?.firstName?.message}</span>
@@ -93,6 +113,7 @@ const ToDoList = () => {
         />
         <span>{errors?.password1?.message}</span>
         <button>Add</button>
+        <span>{errors?.extraError?.message}</span>
       </form>
     </div>
   );
